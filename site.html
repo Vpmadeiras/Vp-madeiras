@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VP MADEIRAS - Excelência em Madeira Certificada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Earth Tones -->
+    <!-- Application Structure Plan: A estrutura da aplicação é um site de página única temático, dividido em secções claras (Início, Sobre Nós, Produtos/Serviços, Notícias/Blog, Contactos). Esta arquitetura facilita a navegação linear através de rolagem suave e permite saltos rápidos via menu de navegação. A simplicidade e a organização temática visam otimizar a experiência do utilizador, tornando a informação acessível e compreensível para clientes. -->
+    <!-- Visualization & Content Choices: A secção Hero utiliza uma imagem de fundo (placeholder) e texto para causar impacto imediato (Objetivo: Engajar/Informar). A secção Sobre Nós foca em texto para transmitir missão e valores (Objetivo: Informar/Construir Confiança). Produtos/Serviços são apresentados em um layout de cartões para facilitar a visualização das ofertas (Objetivo: Informar/Apresentar Ofertas). A secção Notícias/Blog simula posts com uma lista simples (Objetivo: Informar/Engajar). A secção Contactos inclui um formulário básico para facilitar a comunicação (Objetivo: Facilitar Comunicação). Todas as interações são baseadas em JavaScript puro e Tailwind CSS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        :root {
+            --primary-color: #22543d; /* Um verde floresta escuro */
+            --secondary-color: #f0ead6; /* Um bege quente */
+            --accent-color: #c0a080; /* Um tom de madeira claro */
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --button-hover: #1a4330; /* Verde mais escuro para hover */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: var(--button-hover);
+        }
+        .hero-section {
+            background-image: url('https://placehold.co/1920x800/22543d/c0a080?text=VP+MADEIRAS'); /* Placeholder image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased">
+
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-md sticky top-0 z-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <span class="text-3xl font-extrabold" style="color: var(--primary-color);">VP</span>
+                    <span class="text-3xl font-light ml-1" style="color: var(--accent-color);">MADEIRAS</span>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 font-medium pb-1">Início</a>
+                    <a href="#sobre" class="nav-link text-gray-700 font-medium pb-1">Sobre Nós</a>
+                    <a href="#produtos" class="nav-link text-gray-700 font-medium pb-1">Produtos & Serviços</a>
+                    <a href="#noticias" class="nav-link text-gray-700 font-medium pb-1">Notícias & Blog</a>
+                    <a href="#contactos" class="nav-link text-gray-700 font-medium pb-1">Contactos</a>
+                </nav>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-300">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+            <!-- Mobile Menu Overlay -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white w-full absolute shadow-lg py-4">
+                <a href="#home" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Início</a>
+                <a href="#sobre" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sobre Nós</a>
+                <a href="#produtos" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Produtos & Serviços</a>
+                <a href="#noticias" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notícias & Blog</a>
+                <a href="#contactos" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contactos</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero-section flex-grow-0 py-20 md:py-32 flex items-center text-center text-white">
+            <div class="hero-overlay absolute inset-0"></div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">
+                    VP MADEIRAS: Excelência e Sustentabilidade em Produtos Florestais
+                </h1>
+                <p class="text-lg md:text-xl mb-8 animate-fade-in-up">
+                    Fornecendo madeira certificada PEFC para um futuro mais verde.
+                </p>
+                <a href="#produtos" class="btn-primary inline-block text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105 animate-fade-in">
+                    Descubra os Nossos Produtos
+                </a>
+            </div>
+        </section>
+
+        <!-- Main Content Sections -->
+        <main class="flex-grow">
+            <!-- Sobre Nós Section -->
+            <section id="sobre" class="py-16 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Sobre Nós</h2>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
+                        Na VP MADEIRAS, somos líderes no fornecimento de madeira certificada PEFC, com um compromisso inabalável com a sustentabilidade e a qualidade. A nossa missão é oferecer produtos florestais de excelência, garantindo que cada peça de madeira seja proveniente de florestas geridas de forma responsável. Acreditamos que a madeira é um recurso valioso e renovável, e trabalhamos para assegurar que a sua utilização contribua positivamente para o ambiente e para as gerações futuras.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">🌳</span>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Sustentabilidade</h3>
+                            <p class="text-gray-600">Comprometidos com práticas florestais responsáveis e certificação PEFC.</p>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">✨</span>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Qualidade</h3>
+                            <p class="text-gray-600">Produtos de madeira de alta qualidade, duráveis e confiáveis para os seus projetos.</p>
+                        </div>
+                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">🤝</span>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Parceria</h3>
+                            <p class="text-gray-600">Construindo relações duradouras com clientes e fornecedores.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Produtos & Serviços Section -->
+            <section id="produtos" class="py-16" style="background-color: var(--secondary-color);">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Os Nossos Produtos & Serviços</h2>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
+                        Oferecemos uma vasta gama de produtos de madeira certificados e serviços adaptados às suas necessidades.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Product Card 1 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/c0a080/22543d?text=Madeira+Serrada" alt="Madeira Serrada" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Madeira Serrada</h3>
+                                <p class="text-gray-700 text-sm mb-4">Madeira de alta qualidade, ideal para construção civil, mobiliário e carpintaria.</p>
+                                <a href="#contactos" class="text-blue-600 hover:underline">Saber Mais &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Product Card 2 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/c0a080/22543d?text=Painéis+e+Placas" alt="Painéis e Placas" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Painéis e Placas</h3>
+                                <p class="text-gray-700 text-sm mb-4">Variedade de painéis compensados, OSB e MDF certificados para diversas aplicações.</p>
+                                <a href="#contactos" class="text-blue-600 hover:underline">Saber Mais &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Product Card 3 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/c0a080/22543d?text=Serviços+Personalizados" alt="Serviços Personalizados" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Serviços Personalizados</h3>
+                                <p class="text-gray-700 text-sm mb-4">Corte sob medida, tratamento de madeira e consultoria para o seu projeto.</p>
+                                <a href="#contactos" class="text-blue-600 hover:underline">Saber Mais &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notícias & Blog Section -->
+            <section id="noticias" class="py-16 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Últimas Notícias & Blog</h2>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
+                        Mantenha-se atualizado sobre as últimas novidades da VP MADEIRAS e do setor florestal.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Blog Post 1 -->
+                        <div class="bg-gray-50 rounded-lg shadow-sm p-6 text-left">
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Expansão da Produção Sustentável</h3>
+                            <p class="text-gray-700 text-sm mb-3">A VP MADEIRAS anuncia um investimento significativo na modernização da sua linha de produção, com foco em eficiência energética e redução de desperdícios.</p>
+                            <span class="text-gray-500 text-xs">15 de Junho de 2024</span>
+                            <a href="#" class="block mt-4 text-blue-600 hover:underline">Ler Mais &rarr;</a>
+                        </div>
+                        <!-- Blog Post 2 -->
+                        <div class="bg-gray-50 rounded-lg shadow-sm p-6 text-left">
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">A Importância da Certificação PEFC</h3>
+                            <p class="text-gray-700 text-sm mb-3">Entenda como a certificação PEFC garante a rastreabilidade e a legalidade da madeira, protegendo as florestas globais.</p>
+                            <span class="text-gray-500 text-xs">10 de Junho de 2024</span>
+                            <a href="#" class="block mt-4 text-blue-600 hover:underline">Ler Mais &rarr;</a>
+                        </div>
+                        <!-- Blog Post 3 -->
+                        <div class="bg-gray-50 rounded-lg shadow-sm p-6 text-left">
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Novas Tendências em Construção Sustentável</h3>
+                            <p class="text-gray-700 text-sm mb-3">Exploramos as inovações e materiais que estão a moldar o futuro da construção civil sustentável, com a madeira no centro.</p>
+                            <span class="text-gray-500 text-xs">01 de Junho de 2024</span>
+                            <a href="#" class="block mt-4 text-blue-600 hover:underline">Ler Mais &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contactos Section -->
+            <section id="contactos" class="py-16" style="background-color: var(--secondary-color);">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Contacte-nos</h2>
+                    <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12">
+                        Tem alguma questão, sugestão ou gostaria de um orçamento? Estamos prontos para o ajudar!
+                    </p>
+
+                    <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                        <form id="contact-form" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 text-sm font-bold mb-2 text-left">Nome:</label>
+                                <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="O seu nome completo">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 text-sm font-bold mb-2 text-left">Email:</label>
+                                <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="o.seu@email.com">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-700 text-sm font-bold mb-2 text-left">Mensagem:</label>
+                                <textarea id="message" name="message" rows="5" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="A sua mensagem..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary text-white font-semibold py-3 px-8 rounded-full text-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105">
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                        <div id="form-message" class="mt-6 text-center text-sm font-medium hidden"></div>
+                    </div>
+
+                    <div class="mt-12 text-gray-700">
+                        <p class="text-xl font-semibold mb-4">Outras Formas de Contacto:</p>
+                        <p class="text-lg mb-2">📞 Telefone: +351 21 XXX XX XX</p>
+                        <p class="text-lg mb-2">📧 Email: info@vpmadeiras.pt</p>
+                        <p class="text-lg">📍 Endereço: Rua da Floresta, 123, Cidade Sustentável, Portugal</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white mt-8 py-8">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600">
+                <p>&copy; 2024 VP MADEIRAS. Todos os direitos reservados.</p>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <!-- Placeholder Social Media Icons -->
+                    <a href="#" class="text-gray-500 hover:text-gray-700 transition duration-300">Facebook</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-700 transition duration-300">LinkedIn</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-700 transition duration-300">Instagram</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Contact form submission handling (simulated)
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+
+            formMessage.classList.remove('hidden');
+            formMessage.classList.remove('text-green-600', 'text-red-600');
+            formMessage.classList.add('text-gray-700');
+            formMessage.textContent = 'A enviar mensagem...';
+
+            // Simulate API call
+            setTimeout(() => {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                if (name && email && message) {
+                    formMessage.classList.remove('text-gray-700');
+                    formMessage.classList.add('text-green-600');
+                    formMessage.textContent = 'Mensagem enviada com sucesso! Obrigado pelo seu contacto.';
+                    contactForm.reset(); // Clear the form
+                } else {
+                    formMessage.classList.remove('text-gray-700');
+                    formMessage.classList.add('text-red-600');
+                    formMessage.textContent = 'Por favor, preencha todos os campos.';
+                }
+            }, 1500); // Simulate 1.5 seconds delay for submission
+        });
+    </script>
+
+</body>
+</html>
