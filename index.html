@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VP MADEIRAS - Excelência em Madeira Certificada</title>
+    <title>VP MADEIRAS - Excelência em Madeira Certificada FSC & PEFC</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chosen Palette: Warm Earth Tones -->
-    <!-- Application Structure Plan: A estrutura da aplicação é um site de página única temático, dividido em secções claras (Início, Sobre Nós, Produtos/Serviços, Notícias/Blog, Contactos). Esta arquitetura facilita a navegação linear através de rolagem suave e permite saltos rápidos via menu de navegação. A simplicidade e a organização temática visam otimizar a experiência do utilizador, tornando a informação acessível e compreensível para clientes. -->
-    <!-- Visualization & Content Choices: A secção Hero utiliza uma imagem de fundo (placeholder) e texto para causar impacto imediato (Objetivo: Engajar/Informar). A secção Sobre Nós foca em texto para transmitir missão e valores (Objetivo: Informar/Construir Confiança). Produtos/Serviços são apresentados em um layout de cartões para facilitar a visualização das ofertas (Objetivo: Informar/Apresentar Ofertas). A secção Notícias/Blog simula posts com uma lista simples (Objetivo: Informar/Engajar). A secção Contactos inclui um formulário básico para facilitar a comunicação (Objetivo: Facilitar Comunicação). Todas as interações são baseadas em JavaScript puro e Tailwind CSS. -->
+    <!-- Chosen Palette: Warm Earth Tones (Green Forest: #22543d, Warm Beige: #f0ead6, Light Wood Accent: #c0a080, Dark Text: #333333, Light Text: #ffffff, Button Hover: #1a4330) -->
+    <!-- Application Structure Plan: O site é uma Single-Page Application (SPA) com navegação ancorada, organizada em secções temáticas: Home (impacto visual), Valores & Compromisso (diferenciadores chave), Sobre Nós (detalhes da empresa), Produtos (ofertas), Certificações (ênfase na conformidade), Galeria de Aplicações (uso dos produtos), Notícias (atualizações) e Contactos. Esta estrutura foi escolhida para proporcionar uma jornada intuitiva ao utilizador, permitindo tanto uma navegação linear por rolagem quanto saltos rápidos via menu fixo. O design prioriza a clareza e a credibilidade, alinhando-se a sites profissionais do setor madeireiro. -->
+    <!-- Visualization & Content Choices: A secção Hero utiliza uma grande imagem de fundo com overlay e texto impactante para captar a atenção (Engajar/Informar). A secção Valores & Compromisso usa um grid de cartões com emojis/ícones para destacar rapidamente os pilares da empresa (Informar/Diferenciar). A secção Sobre Nós e Produtos utilizam blocos de texto e imagens para detalhar a oferta. A nova secção Certificações é crucial, apresentando os logos PEFC e FSC com texto explicativo (Informar/Credibilizar). A Galeria de Aplicações usa um grid de imagens placeholder para inspirar clientes (Engajar/Demonstrar). A secção Notícias mantém um formato de lista para posts. O formulário de Contactos é simples e funcional. Todas as interações são realizadas com JavaScript puro e o layout é totalmente responsivo com Tailwind CSS. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         :root {
@@ -17,6 +17,8 @@
             --text-dark: #333333;
             --text-light: #ffffff;
             --button-hover: #1a4330; /* Verde mais escuro para hover */
+            --section-bg-light: #ffffff;
+            --section-bg-dark: #f7f3e9; /* Um bege ligeiramente mais escuro que o body */
         }
         html {
             scroll-behavior: smooth;
@@ -41,14 +43,36 @@
             background-color: var(--button-hover);
         }
         .hero-section {
-            background-image: url('https://placehold.co/1920x800/22543d/c0a080?text=VP+MADEIRAS'); /* Placeholder image */
+            background-image: url('https://placehold.co/1920x800/22543d/f0ead6?text=FLORESTAS+SUSTENTÁVEIS');
             background-size: cover;
             background-position: center;
             position: relative;
+            min-height: 70vh; /* Ajuste para ter um bom impacto visual */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         .hero-overlay {
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.5); /* Overlay mais escuro para melhor contraste do texto */
+            position: absolute;
+            inset: 0;
         }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in-down { animation: fadeInDown 1s ease-out; }
+        .animate-fade-in-up { animation: fadeInUp 1s ease-out 0.3s forwards; opacity: 0; }
+        .animate-fade-in { animation: fadeIn 1s ease-out 0.6s forwards; opacity: 0; }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,9 +90,12 @@
                 </div>
                 <nav class="hidden md:flex space-x-8">
                     <a href="#home" class="nav-link text-gray-700 font-medium pb-1">Início</a>
+                    <a href="#valores" class="nav-link text-gray-700 font-medium pb-1">Valores</a>
                     <a href="#sobre" class="nav-link text-gray-700 font-medium pb-1">Sobre Nós</a>
-                    <a href="#produtos" class="nav-link text-gray-700 font-medium pb-1">Produtos & Serviços</a>
-                    <a href="#noticias" class="nav-link text-gray-700 font-medium pb-1">Notícias & Blog</a>
+                    <a href="#produtos" class="nav-link text-gray-700 font-medium pb-1">Produtos</a>
+                    <a href="#certificacoes" class="nav-link text-gray-700 font-medium pb-1">Certificações</a>
+                    <a href="#galeria" class="nav-link text-gray-700 font-medium pb-1">Galeria</a>
+                    <a href="#noticias" class="nav-link text-gray-700 font-medium pb-1">Notícias</a>
                     <a href="#contactos" class="nav-link text-gray-700 font-medium pb-1">Contactos</a>
                 </nav>
                 <!-- Mobile Menu Button -->
@@ -79,22 +106,25 @@
             <!-- Mobile Menu Overlay -->
             <div id="mobile-menu" class="hidden md:hidden bg-white w-full absolute shadow-lg py-4">
                 <a href="#home" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Início</a>
+                <a href="#valores" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Valores</a>
                 <a href="#sobre" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sobre Nós</a>
-                <a href="#produtos" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Produtos & Serviços</a>
-                <a href="#noticias" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notícias & Blog</a>
+                <a href="#produtos" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Produtos</a>
+                <a href="#certificacoes" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Certificações</a>
+                <a href="#galeria" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Galeria</a>
+                <a href="#noticias" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Notícias</a>
                 <a href="#contactos" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contactos</a>
             </div>
         </header>
 
         <!-- Hero Section -->
-        <section id="home" class="hero-section flex-grow-0 py-20 md:py-32 flex items-center text-center text-white">
+        <section id="home" class="hero-section flex-grow-0 text-white">
             <div class="hero-overlay absolute inset-0"></div>
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 md:py-32">
                 <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">
-                    VP MADEIRAS: Excelência e Sustentabilidade em Produtos Florestais
+                    VP MADEIRAS: Excelência em Madeira 100% Certificada
                 </h1>
                 <p class="text-lg md:text-xl mb-8 animate-fade-in-up">
-                    Fornecendo madeira certificada PEFC para um futuro mais verde.
+                    O seu parceiro de confiança para produtos florestais com certificação PEFC e FSC.
                 </p>
                 <a href="#produtos" class="btn-primary inline-block text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105 animate-fade-in">
                     Descubra os Nossos Produtos
@@ -104,67 +134,167 @@
 
         <!-- Main Content Sections -->
         <main class="flex-grow">
-            <!-- Sobre Nós Section -->
+            <!-- Valores & Compromisso Section -->
+            <section id="valores" class="py-16" style="background-color: var(--section-bg-dark);">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Os Nossos Valores e Compromisso</h2>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
+                        Na VP MADEIRAS, a nossa atuação é guiada por pilares fundamentais que refletem a nossa paixão pela madeira e o respeito pelo planeta.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">🌍</span>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Sustentabilidade Integral</h3>
+                            <p class="text-gray-600 text-sm">Garantimos que toda a nossa madeira provém de florestas geridas de forma responsável, com impacto ambiental e social positivo, através das nossas certificações.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">🏆</span>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Qualidade Inquestionável</h3>
+                            <p class="text-gray-600 text-sm">Comprometemo-nos com a excelência em cada produto, desde a seleção da matéria-prima até ao acabamento final, para durabilidade e desempenho.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">🤝</span>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Transparência e Confiança</h3>
+                            <p class="text-gray-600 text-sm">Baseamos as nossas relações na honestidade e clareza, assegurando que os nossos clientes e parceiros confiem na origem e processo dos nossos produtos.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">💡</span>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Inovação e Eficiência</h3>
+                            <p class="text-gray-600 text-sm">Buscamos continuamente novas tecnologias e métodos para otimizar a produção e reduzir o nosso impacto, sem comprometer a qualidade.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sobre Nós Section (Detalhes) -->
             <section id="sobre" class="py-16 bg-white">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Sobre Nós</h2>
-                    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-8">
-                        Na VP MADEIRAS, somos líderes no fornecimento de madeira certificada PEFC, com um compromisso inabalável com a sustentabilidade e a qualidade. A nossa missão é oferecer produtos florestais de excelência, garantindo que cada peça de madeira seja proveniente de florestas geridas de forma responsável. Acreditamos que a madeira é um recurso valioso e renovável, e trabalhamos para assegurar que a sua utilização contribua positivamente para o ambiente e para as gerações futuras.
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">🌳</span>
-                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Sustentabilidade</h3>
-                            <p class="text-gray-600">Comprometidos com práticas florestais responsáveis e certificação PEFC.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">A Nossa História e Missão</h2>
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+                        <div class="md:w-1/2 text-left">
+                            <p class="text-lg text-gray-700 mb-6">
+                                Fundada com a visão de conciliar a indústria da madeira com a responsabilidade ambiental, a VP MADEIRAS estabeleceu-se como uma referência no mercado de produtos florestais. Acreditamos que a madeira é um recurso precioso e renovável, e a nossa missão é garantir a sua utilização consciente e sustentável para as gerações presentes e futuras.
+                            </p>
+                            <p class="text-lg text-gray-700 mb-6">
+                                A nossa trajetória é marcada pela busca incessante da qualidade e pela inovação nos processos. Investimos em tecnologia de ponta e na capacitação da nossa equipa para assegurar que cada produto VP MADEIRAS atenda aos mais elevados padrões.
+                            </p>
+                            <p class="text-lg text-gray-700">
+                                Através do nosso compromisso com as certificações PEFC e FSC, oferecemos aos nossos clientes a garantia de que estão a adquirir produtos provenientes de fontes controladas e responsáveis, contribuindo para a conservação das florestas em todo o mundo.
+                            </p>
                         </div>
-                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">✨</span>
-                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Qualidade</h3>
-                            <p class="text-gray-600">Produtos de madeira de alta qualidade, duráveis e confiáveis para os seus projetos.</p>
-                        </div>
-                        <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                            <span class="text-5xl mb-4 block" style="color: var(--accent-color);">🤝</span>
-                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Parceria</h3>
-                            <p class="text-gray-600">Construindo relações duradouras com clientes e fornecedores.</p>
+                        <div class="md:w-1/2">
+                            <img src="https://placehold.co/600x400/c0a080/22543d?text=Nossa+Equipe+e+Instalações" alt="Equipe e Instalações VP Madeiras" class="rounded-lg shadow-lg w-full h-auto object-cover">
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Produtos & Serviços Section -->
-            <section id="produtos" class="py-16" style="background-color: var(--secondary-color);">
+            <section id="produtos" class="py-16" style="background-color: var(--section-bg-dark);">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Os Nossos Produtos & Serviços</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Catálogo de Produtos & Serviços</h2>
                     <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
-                        Oferecemos uma vasta gama de produtos de madeira certificados e serviços adaptados às suas necessidades.
+                        Explore a nossa gama completa de produtos de madeira 100% certificados PEFC e FSC, e os serviços especializados que oferecemos para o seu projeto.
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Product Card 1 -->
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                            <img src="https://placehold.co/600x400/c0a080/22543d?text=Madeira+Serrada" alt="Madeira Serrada" class="w-full h-48 object-cover">
+                            <img src="https://placehold.co/600x400/b08f6b/f0ead6?text=Madeira+Serrada+Certificada" alt="Madeira Serrada" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Madeira Serrada</h3>
-                                <p class="text-gray-700 text-sm mb-4">Madeira de alta qualidade, ideal para construção civil, mobiliário e carpintaria.</p>
-                                <a href="#contactos" class="text-blue-600 hover:underline">Saber Mais &rarr;</a>
+                                <p class="text-gray-700 text-sm mb-4">Madeira de alta qualidade, 100% certificada PEFC e FSC, ideal para construção civil, mobiliário e carpintaria. Disponível em várias espécies e dimensões.</p>
+                                <a href="#contactos" class="text-blue-600 hover:underline">Solicitar Orçamento &rarr;</a>
                             </div>
                         </div>
                         <!-- Product Card 2 -->
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                            <img src="https://placehold.co/600x400/c0a080/22543d?text=Painéis+e+Placas" alt="Painéis e Placas" class="w-full h-48 object-cover">
+                            <img src="https://placehold.co/600x400/b08f6b/f0ead6?text=Painéis+de+Madeira" alt="Painéis e Placas" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Painéis e Placas</h3>
-                                <p class="text-gray-700 text-sm mb-4">Variedade de painéis compensados, OSB e MDF certificados para diversas aplicações.</p>
-                                <a href="#contactos" class="text-blue-600 hover:underline">Saber Mais &rarr;</a>
+                                <p class="text-gray-700 text-sm mb-4">Vasta variedade de painéis compensados, OSB, MDF e aglomerados, todos com a garantia da certificação PEFC e FSC, para uso industrial e decorativo.</p>
+                                <a href="#contactos" class="text-blue-600 hover:underline">Ver Detalhes &rarr;</a>
                             </div>
                         </div>
                         <!-- Product Card 3 -->
                         <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                            <img src="https://placehold.co/600x400/c0a080/22543d?text=Serviços+Personalizados" alt="Serviços Personalizados" class="w-full h-48 object-cover">
+                            <img src="https://placehold.co/600x400/b08f6b/f0ead6?text=Serviços+Especiais" alt="Serviços Personalizados" class="w-full h-48 object-cover">
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Serviços Personalizados</h3>
-                                <p class="text-gray-700 text-sm mb-4">Corte sob medida, tratamento de madeira e consultoria para o seu projeto.</p>
-                                <a href="#contactos" class="text-blue-600 hover:underline">Saber Mais &rarr;</a>
+                                <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Serviços de Processamento</h3>
+                                <p class="text-gray-700 text-sm mb-4">Oferecemos serviços de corte sob medida, lixamento, e tratamento de madeira, otimizando o material certificado para as suas especificações.</p>
+                                <a href="#contactos" class="text-blue-600 hover:underline">Consultar Serviço &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certificações Section -->
+            <section id="certificacoes" class="py-16 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">As Nossas Certificações</h2>
+                    <p class="text-lg text-gray-700 max-w-4xl mx-auto mb-12">
+                        Na VP MADEIRAS, a transparência e a responsabilidade são pilares. As nossas certificações PEFC e FSC garantem que a madeira que adquire é proveniente de fontes geridas de forma sustentável, legal e socialmente benéfica.
+                    </p>
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-12">
+                        <div class="w-full md:w-1/2 p-6 bg-gray-50 rounded-lg shadow-md flex flex-col items-center text-center">
+                            <img src="https://placehold.co/150x150/ffffff/000000?text=LOGO+PEFC" alt="Logo PEFC" class="mb-4">
+                            <h3 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">PEFC (Programme for the Endorsement of Forest Certification)</h3>
+                            <p class="text-gray-700 text-base">O PEFC é o maior sistema de certificação florestal do mundo, promovendo a gestão sustentável das florestas. A nossa certificação PEFC assegura que a madeira que utilizamos e vendemos é de origem responsável, com controlo de toda a cadeia de custódia.</p>
+                            <a href="#" class="mt-4 text-blue-600 hover:underline">Saber Mais sobre PEFC &rarr;</a>
+                        </div>
+                        <div class="w-full md:w-1/2 p-6 bg-gray-50 rounded-lg shadow-md flex flex-col items-center text-center">
+                            <img src="https://placehold.co/150x150/ffffff/000000?text=LOGO+FSC" alt="Logo FSC" class="mb-4">
+                            <h3 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">FSC (Forest Stewardship Council)</h3>
+                            <p class="text-700 text-base">O FSC é uma organização global dedicada a promover a gestão florestal responsável. A nossa certificação FSC 100% significa que a madeira utilizada provém exclusivamente de florestas certificadas FSC, garantindo os mais altos padrões ambientais e sociais.</p>
+                            <a href="#" class="mt-4 text-blue-600 hover:underline">Saber Mais sobre FSC &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Galeria de Aplicações Section -->
+            <section id="galeria" class="py-16" style="background-color: var(--section-bg-dark);">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Inspire-se: Galeria de Aplicações</h2>
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
+                        Veja como a nossa madeira certificada pode transformar projetos, desde a construção civil ao design de interiores.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/967d5e/f0ead6?text=Construção+Sustentável" alt="Construção Sustentável" class="w-full h-56 object-cover">
+                            <div class="p-4 text-left">
+                                <p class="text-gray-700 text-sm font-semibold">Projeto de Habitação em Madeira</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/967d5e/f0ead6?text=Mobiliário+Design" alt="Mobiliário Design" class="w-full h-56 object-cover">
+                            <div class="p-4 text-left">
+                                <p class="text-gray-700 text-sm font-semibold">Mobiliário de Design Exclusivo</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/967d5e/f0ead6?text=Revestimentos+Interiores" alt="Revestimentos Interiores" class="w-full h-56 object-cover">
+                            <div class="p-4 text-left">
+                                <p class="text-gray-700 text-sm font-semibold">Revestimentos Interiores Elegantes</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/967d5e/f0ead6?text=Estruturas+para+Jardim" alt="Estruturas para Jardim" class="w-full h-56 object-cover">
+                            <div class="p-4 text-left">
+                                <p class="text-gray-700 text-sm font-semibold">Pérgolas e Estruturas para Exterior</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/967d5e/f0ead6?text=Decks+Residenciais" alt="Decks Residenciais" class="w-full h-56 object-cover">
+                            <div class="p-4 text-left">
+                                <p class="text-gray-700 text-sm font-semibold">Decks Residenciais e Comerciais</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                            <img src="https://placehold.co/600x400/967d5e/f0ead6?text=Elementos+Decorativos" alt="Elementos Decorativos" class="w-full h-56 object-cover">
+                            <div class="p-4 text-left">
+                                <p class="text-gray-700 text-sm font-semibold">Detalhes Decorativos em Madeira</p>
                             </div>
                         </div>
                     </div>
@@ -174,30 +304,30 @@
             <!-- Notícias & Blog Section -->
             <section id="noticias" class="py-16 bg-white">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Últimas Notícias & Blog</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Mantenha-se Atualizado: Notícias & Blog</h2>
                     <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-12">
-                        Mantenha-se atualizado sobre as últimas novidades da VP MADEIRAS e do setor florestal.
+                        Fique a par das últimas novidades da VP MADEIRAS, tendências do setor florestal e informações relevantes sobre sustentabilidade e madeira certificada.
                     </p>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Blog Post 1 -->
                         <div class="bg-gray-50 rounded-lg shadow-sm p-6 text-left">
-                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Expansão da Produção Sustentável</h3>
-                            <p class="text-gray-700 text-sm mb-3">A VP MADEIRAS anuncia um investimento significativo na modernização da sua linha de produção, com foco em eficiência energética e redução de desperdícios.</p>
-                            <span class="text-gray-500 text-xs">15 de Junho de 2024</span>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">VP MADEIRAS na Construção Sustentável</h3>
+                            <p class="text-gray-700 text-sm mb-3">Conheça o nosso envolvimento em projetos inovadores de construção que utilizam exclusivamente madeira certificada, promovendo a eficiência e a responsabilidade ambiental.</p>
+                            <span class="text-gray-500 text-xs">20 de Junho de 2024</span>
                             <a href="#" class="block mt-4 text-blue-600 hover:underline">Ler Mais &rarr;</a>
                         </div>
                         <!-- Blog Post 2 -->
                         <div class="bg-gray-50 rounded-lg shadow-sm p-6 text-left">
-                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">A Importância da Certificação PEFC</h3>
-                            <p class="text-gray-700 text-sm mb-3">Entenda como a certificação PEFC garante a rastreabilidade e a legalidade da madeira, protegendo as florestas globais.</p>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Guia Completo: Diferenças entre Certificação PEFC e FSC</h3>
+                            <p class="text-gray-700 text-sm mb-3">Um artigo detalhado que explica as particularidades e o valor de cada uma das principais certificações florestais que a VP MADEIRAS orgulhosamente detém.</p>
                             <span class="text-gray-500 text-xs">10 de Junho de 2024</span>
                             <a href="#" class="block mt-4 text-blue-600 hover:underline">Ler Mais &rarr;</a>
                         </div>
                         <!-- Blog Post 3 -->
                         <div class="bg-gray-50 rounded-lg shadow-sm p-6 text-left">
-                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">Novas Tendências em Construção Sustentável</h3>
-                            <p class="text-gray-700 text-sm mb-3">Exploramos as inovações e materiais que estão a moldar o futuro da construção civil sustentável, com a madeira no centro.</p>
+                            <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-color);">O Futuro da Madeira na Arquitetura Moderna</h3>
+                            <p class="text-gray-700 text-sm mb-3">Exploramos como a madeira, um material tradicional e sustentável, está a ser redescoberta por arquitetos para criar edifícios inovadores e ecológicos.</p>
                             <span class="text-gray-500 text-xs">01 de Junho de 2024</span>
                             <a href="#" class="block mt-4 text-blue-600 hover:underline">Ler Mais &rarr;</a>
                         </div>
@@ -206,11 +336,11 @@
             </section>
 
             <!-- Contactos Section -->
-            <section id="contactos" class="py-16" style="background-color: var(--secondary-color);">
+            <section id="contactos" class="py-16" style="background-color: var(--section-bg-dark);">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 class="text-3xl md:text-4xl font-bold mb-8" style="color: var(--primary-color);">Contacte-nos</h2>
                     <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-12">
-                        Tem alguma questão, sugestão ou gostaria de um orçamento? Estamos prontos para o ajudar!
+                        Tem alguma questão, sugestão ou gostaria de um orçamento? A nossa equipa está pronta para o ajudar!
                     </p>
 
                     <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
@@ -239,6 +369,19 @@
                         <p class="text-lg mb-2">📞 Telefone: +351 21 XXX XX XX</p>
                         <p class="text-lg mb-2">📧 Email: info@vpmadeiras.pt</p>
                         <p class="text-lg">📍 Endereço: Rua da Floresta, 123, Cidade Sustentável, Portugal</p>
+                        <div class="mt-6">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.67890!2d-9.1350!3d38.7223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1934a36f000001%3A0x673456789abcdef!2sLocal%20Empresa%20Exemplo!5e0!3m2!1spt-PT!2spt!4v1678901234567!5m2!1spt-PT!2spt" 
+                                width="100%" 
+                                height="300" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="rounded-lg shadow-md"
+                            ></iframe>
+                            <p class="text-xs text-gray-500 mt-2">Mapa meramente ilustrativo.</p>
+                        </div>
                     </div>
                 </div>
             </section>
